@@ -1,0 +1,65 @@
+cabal-version:      3.4
+name:               corrosion
+version:            0.1.0.0
+-- synopsis:
+-- description:
+license:            BSD-2-Clause
+license-file:       LICENSE
+author:             Markus Läll
+maintainer:         markus.l2ll@gmail.com
+-- copyright:
+category:           System
+build-type:         Simple
+-- extra-source-files:
+
+common warnings
+    ghc-options: -Wall
+
+common language-extensions
+    default-extensions:
+       BlockArguments
+       DerivingStrategies
+       LambdaCase
+       MultiWayIf
+       OverloadedStrings
+       PatternSynonyms
+       TypeOperators
+    default-language: GHC2021
+
+common dependencies
+    build-depends:
+      , aeson
+      , base
+      , bytestring
+      , directory
+      , lens
+      , lens-aeson
+      , process
+      , scientific
+      , text
+      , time
+      , streaming
+      , containers
+      , unordered-containers
+      , mtl
+      , optparse-applicative
+
+common common
+    import:           warnings
+    import:           language-extensions
+    import:           dependencies
+
+library
+    import:          common
+    hs-source-dirs:  src
+    exposed-modules:
+      Corrosion
+      Coreutils
+      Builtins
+      Core
+
+executable corrode
+    import:           common
+    hs-source-dirs:   app
+    main-is:          Main.hs
+    build-depends:    corrosion
