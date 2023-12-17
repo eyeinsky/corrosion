@@ -88,11 +88,21 @@ pwd = liftIO getCurrentDirectory
 
 -- | wc
 wc_lines :: FilePath -> IO Int
-wc_lines f = IO.withFile f IO.ReadMode $ \h -> let
-  go n = do
+wc_lines = wc_lines2
+
+-- | 4.3s, uses BS.hGetLine to count lines
+wc_lines2 :: FilePath -> IO Int
+wc_lines2 filePath = do
+  bs <- BS.readFile filePath
+  return $ BS.count 10 bs
+
+-- | 4.3s, uses BS.hGetLine to count lines
+wc_lines1 :: FilePath -> IO Int
+wc_lines1 filePath = IO.withFile filePath IO.ReadMode $ \h -> let
+  go !count = do
     IO.hIsEOF h >>= \case
-      True -> return n
-      False -> void (BS.hGetLine h) *> go (n + 1)
+      True -> return count
+      False -> void (BS.hGetLine h) *> go (count + 1)
   in go 0
 
 -- wc_words = undefined
