@@ -102,11 +102,13 @@ timeIO action = do
   t1 <- Time.getCurrentTime
   return (a, Time.diffUTCTime t1 t0)
 
-timePrint :: String -> IO a -> IO a
-timePrint label action = do
+timePrintPrim :: (Time.NominalDiffTime -> IO ()) -> IO a -> IO a
+timePrintPrim print_ action = do
   (a, time) <- timeIO action
-  putStrLn $ label <> " took " <> show time
-  return a
+  print_ time $> a
+
+timePrint :: String -> IO a -> IO a
+timePrint label action = timePrintPrim (\time -> putStrLn $ label <> " took " <> show time) action
 
 timePrint_ :: IO a -> IO a
 timePrint_ action = timePrint "_" action
