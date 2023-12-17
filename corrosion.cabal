@@ -53,10 +53,12 @@ library
     import:          common
     hs-source-dirs:  src
     exposed-modules:
-      Corrosion
-      Coreutils
       Builtins
       Core
+      Coreutils
+      Corrosion
+      Filesystem
+      InternalPrelude
 
 executable corrode
     import:           common

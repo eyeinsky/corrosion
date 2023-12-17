@@ -4,8 +4,8 @@ module Coreutils where
 import Prelude hiding (lines)
 import Core
 
-import Data.ByteString as BS
-import Data.ByteString.Char8 qualified as BS
+import Data.ByteString qualified as BS
+import Data.ByteString.Char8 qualified as BS8
 import Streaming.Prelude qualified as S
 import System.IO qualified as IO
 
@@ -27,7 +27,7 @@ sterrLn = S.mapM (hPutLn IO.stderr . coerce)
 
 -- | Convert stream of buffers to stream of lines
 lines :: S.Stream (S.Of Buffer) IO () -> S.Stream (S.Of Line) IO ()
-lines s = S.for s (S.each . coerce @_ @[Line] . BS.lines . coerce)
+lines s = S.for s (S.each . coerce @_ @[Line] . BS8.lines . coerce)
 
 -- -- A direct implementation of the above
 -- lines :: S.Stream (S.Of Buffer) IO () -> S.Stream (S.Of Line) IO ()
