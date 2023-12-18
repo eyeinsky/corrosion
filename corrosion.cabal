@@ -28,7 +28,7 @@ common language-extensions
 
 common dependencies
     build-depends:
-      , aeson
+        aeson
       , base
       , bytestring
       , directory
@@ -43,6 +43,7 @@ common dependencies
       , unordered-containers
       , mtl
       , optparse-applicative
+      , filepath
 
 common common
     import:           warnings
@@ -53,12 +54,14 @@ library
     import:          common
     hs-source-dirs:  src
     exposed-modules:
-      Builtins
-      Core
-      Coreutils
-      Corrosion
-      Filesystem
       InternalPrelude
+      Core
+
+      Builtins
+      Coreutils
+      Filesystem
+
+      Corrosion
 
 executable corrode
     import:           common
