@@ -10,6 +10,7 @@ import Core as Export
 import Filesystem as Export
 import Builtins as Export
 import Coreutils as Export
+import Findutils as Export
 
 import InternalPrelude
 

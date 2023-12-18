@@ -60,11 +60,19 @@ library
       Builtins
       Coreutils
       Filesystem
+      Filesystem.OsPath
+      Findutils
 
       Corrosion
 
 executable corrode
     import:           common
     hs-source-dirs:   app
+    main-is:          Main.hs
+    build-depends:    corrosion
+
+executable idlebox
+    import:           common
+    hs-source-dirs:   idlebox
     main-is:          Main.hs
     build-depends:    corrosion
